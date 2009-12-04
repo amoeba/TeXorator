@@ -34,9 +34,7 @@ NSInteger * const TXODefaultRemoveJunk = 0;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)note
-{	//NSArray *objects = [NSArray arrayWithObjects:TXODefaultExecutablePath, TXODefaultRemoveJunk];
-	//NSArray *keys = [NSArray arrayWithObjects: @"TXOTexExecutable", @"TXORemoveJunk"];
-	//[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjects: objects forKeys: keys]];
+{	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 															 TXODefaultExecutablePath, @"TXOTexExecutable",
 															 TXODefaultRemoveJunk, @"TXORemoveJunk"]];
