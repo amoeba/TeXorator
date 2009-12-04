@@ -47,6 +47,12 @@
         [pdfView goToDestination:dest];
         [dest release];
     }
+	
+	if ([self removeJunk]) {
+		[[NSFileManager defaultManager] removeItemAtURL: [NSURL fileURLWithPath:[[[self fileName] stringByDeletingPathExtension] stringByAppendingPathExtension:@"aux"]] error: nil];
+		[[NSFileManager defaultManager] removeItemAtURL: [NSURL fileURLWithPath:[[[self fileName] stringByDeletingPathExtension] stringByAppendingPathExtension:@"synctex.gz"]] error: nil];
+		[[NSFileManager defaultManager] removeItemAtURL: [NSURL fileURLWithPath:[[[self fileName] stringByDeletingPathExtension] stringByAppendingPathExtension:@"log"]] error: nil];		
+	}
 }
 
 - (void)texControllerFinishedWithError
@@ -57,6 +63,11 @@
 - (NSString *)windowNibName
 {
     return @"TXODocument";
+}
+
+- (NSInteger *)removeJunk
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"TXORemoveJunk"];
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController

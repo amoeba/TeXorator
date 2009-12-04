@@ -8,6 +8,7 @@
 #import "TXOPreferencesController.h"
 
 NSString * const TXODefaultExecutablePath = @"/usr/texbin/pdflatex";
+NSInteger * const TXODefaultRemoveJunk = 0;
 
 @implementation TXOPreferencesController
 
@@ -18,18 +19,27 @@ NSString * const TXODefaultExecutablePath = @"/usr/texbin/pdflatex";
 
 - (IBAction)ok:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] setObject:[executablePath stringValue] forKey:@"TXOTexExecutable"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+    [defaults setObject:[executablePath stringValue] forKey:@"TXOTexExecutable"];
+	[defaults setInteger:[removeJunk integerValue] forKey:@"TXORemoveJunk"];
+
     [self close];
 }
 
 - (void)windowDidLoad
 {
     [executablePath setStringValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"TXOTexExecutable"]];
+	[removeJunk setIntegerValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"TXORemoveJunk"]];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)note
-{
-    [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObject:TXODefaultExecutablePath forKey:@"TXOTexExecutable"]];
+{	//NSArray *objects = [NSArray arrayWithObjects:TXODefaultExecutablePath, TXODefaultRemoveJunk];
+	//NSArray *keys = [NSArray arrayWithObjects: @"TXOTexExecutable", @"TXORemoveJunk"];
+	//[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjects: objects forKeys: keys]];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+															 TXODefaultExecutablePath, @"TXOTexExecutable",
+															 TXODefaultRemoveJunk, @"TXORemoveJunk"]];
 }
 
 @end

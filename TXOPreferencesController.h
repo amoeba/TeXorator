@@ -10,6 +10,7 @@
 
 @interface TXOPreferencesController : NSWindowController {
     IBOutlet NSTextField *executablePath;
+	IBOutlet NSButton *removeJunk;
 }
 
 - (IBAction)ok:(id)sender;
