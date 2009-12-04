@@ -19,10 +19,8 @@ NSInteger * const TXODefaultRemoveJunk = 0;
 
 - (IBAction)ok:(id)sender
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-    [defaults setObject:[executablePath stringValue] forKey:@"TXOTexExecutable"];
-	[defaults setInteger:[removeJunk integerValue] forKey:@"TXORemoveJunk"];
+    [[NSUserDefaults standardUserDefaults] setObject:[executablePath stringValue] forKey:@"TXOTexExecutable"];
+	[[NSUserDefaults standardUserDefaults] setInteger:[removeJunk integerValue] forKey:@"TXORemoveJunk"];
 
     [self close];
 }
